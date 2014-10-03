@@ -38,15 +38,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs">
+    <Compile Include="Program.cs" />
+    <Compile Include="ReversiForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Class2.cs" />
+    <Compile Include="ReversiForm.Designer.cs">
+      <DependentUpon>ReversiForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReversiForm.resx">
+      <DependentUpon>ReversiForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
