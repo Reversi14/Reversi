@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Reversi
 {
-    class Bord : Form
+    class Bord : Form //super class
     {
         int w = 6;                  //breedte bord
         int h = 6;                  //hoogte bord
