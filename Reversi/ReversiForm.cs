@@ -59,8 +59,7 @@ namespace Reversi
 
             label1.Text = string.Format("heeft {0} veld(en)", bord.GetScore(Bord.BLAUW));
             label2.Text = string.Format("heeft {0} veld(en)", bord.GetScore(Bord.ROOD));
-
-
+           
             Graphics g = pea.Graphics;
             Pen blackPen = new Pen(Brushes.Black, 1);
 

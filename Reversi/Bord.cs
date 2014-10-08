@@ -13,6 +13,7 @@ namespace Reversi
         public int h;                                   // Aantal vakjes hoog
         bool beurtBlauw = true;                              // Beurt aangeven
         bool beurtRood;
+        bool f;
         public const int LEEG = -1;
         public const int BLAUW = 0;
         public const int ROOD = 1;
@@ -57,7 +58,7 @@ namespace Reversi
                     Stenen[x, y] = ROOD;
 
                 wisselBeurt();
-                ValidMove();
+                // ValidMoveHorizontaal();
             }
         }
         private void wisselBeurt()
@@ -81,64 +82,98 @@ namespace Reversi
             }
             return result;
         }
-        public bool ValidMove(int x, int y)
+
+        public bool ValidMoveHorizontaal(int x, int y)
         {
             if (beurtBlauw)
             {
                 for (int i = 0; i < x; i++)
                 {
-                    if (Stenen[i, y] == Bord.BLAUW)
-                    {
-                        int j = i+1;
-                        for (i = j; i<x; i++)
-                        {
-                            if (Stenen[i, y] != Bord.ROOD)
-                            {
-                                return false;
-                            }
-                            else
-                                return true;
-                        }
-                    }
-                }
-
-                for (int i = w; i > x; i = i-1)
-                {
-                    if (Stenen[i, y] == Bord.BLAUW)
-                    {
-                        int j = i-1;
-                        for (i = j; i > x; i = i-1)
-                        {
-                            if (Stenen[i, y] != Bord.ROOD)
-                            {
-                                return false;
-                            }
-                            else
-                                return true;
-                        }
-                    }
-                }
-                    if (Stenen[x - 1, y] == Bord.ROOD && Stenen[x - 2, y] == Bord.BLAUW)
-                    {
-                        return true;
-                    }
+                    if (Stenen[i, y] != BLAUW)
+                        return false;
                     else
                     {
-                        return false;
+                        int j = i + 1;
+                        for (i = j; i < x; i++)
+                        {
+                            if (Stenen[i, y] != ROOD)
+                            {
+                                f = false;
+                            }
+                        }
+                        if (f)
+                            return false;
+                        else
+                            return true;
                     }
-            }
-            if (beurtRood)
-            {
-                if (Stenen[x - 1, y] == Bord.BLAUW && Stenen[x - 2, y] == Bord.ROOD)
-                {
-                    return true;
                 }
-                else
-                {
-                    return false;
-                }
-            }           
 
+                for (int i = w; i > x; i -= 1)
+                {
+                    if (Stenen[i, y] != BLAUW)
+                        return false;
+                    else
+                    {
+                        int j = i - 1;
+                        for (i = j; i > x; i = i - 1)
+                        {
+                            if (Stenen[i, y] != ROOD)
+                            {
+                                f = false;
+                            }
+                        }
+                        if (f)
+                            return false;
+                        else
+                            return true;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < x; i++)
+                {
+                    if (Stenen[i, y] != ROOD)
+                        return false;
+                    else
+                    {
+                        int j = i + 1;
+                        for (i = j; i < x; i++)
+                        {
+                            if (Stenen[i, y] != BLAUW)
+                            {
+                                f = false;
+                            }
+                        }
+                        if (f)
+                            return false;
+                        else
+                            return true;
+                    }
+                }
+
+                for (int i = w; i > x; i -= 1)
+                {
+                    if (Stenen[i, y] != ROOD)
+                        return false;
+                    else
+                    {
+                        int j = i - 1;
+                        for (i = j; i > x; i = i - 1)
+                        {
+                            if (Stenen[i, y] != BLAUW)
+                            {
+                                f = false;
+                            }
+                        }
+                        if (f)
+                            return false;
+                        else
+                            return true;
+                    }
+                }
+            }
         }
+        
     }
 }
