@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Reversi
 {
-   public partial class ReversiForm : Form  // hoerrrrrr
+   public partial class ReversiForm : Form  
    {
       Rectangle[,] rect;                           // rechthoekige array
       Rectangle[,] steen;                          // stenen in de array
