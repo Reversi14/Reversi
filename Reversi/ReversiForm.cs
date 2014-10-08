@@ -10,14 +10,17 @@ using System.Windows.Forms;
 
 namespace Reversi
 {
-   public partial class ReversiForm : Form  //ebola
+   public partial class ReversiForm : Form
    {
       Rectangle[,] rect;                           // rechthoekige array
       Rectangle[,] steen;                          // stenen in de array
       int[,] Bord;                                 // waardes in de array
-      int w = 8;                                   // aantal vakjes breed
-      int h = 8;                                   // aantal vakjes hoog
+      int w = 6;                                   // aantal vakjes breed
+      int h = 6;                                   // aantal vakjes hoog
       int X, Y;
+      bool beurt = false;
+
+
       public ReversiForm()
       {
          InitializeComponent();
@@ -46,10 +49,31 @@ namespace Reversi
 
       public void panel1_MouseClick(object sender, MouseEventArgs e)
       {
-         X = e.X;
-         Y = e.Y;
+          X = e.X;
+          Y = e.Y;
 
-         panel1.Refresh();
+          int a, b;
+
+          a = X / (panel1.Width / w);
+          b = Y / (panel1.Height / h);
+
+          this.Text = String.Format("{0},{1}", a, b);
+
+          if ( Bord[a,b] == -1)
+          {
+              if (beurt)
+              {
+                  Bord[a, b] = 0;
+              }
+              else
+              {
+                  Bord[a, b] = 1;
+              }
+              beurt = !beurt;
+          }
+          
+
+          panel1.Invalidate();
       }
 
       public void panel1_Paint(object obj, PaintEventArgs pea)

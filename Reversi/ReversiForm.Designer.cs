@@ -39,7 +39,7 @@
          // panel1
          // 
          this.panel1.AutoSize = true;
-         this.panel1.Location = new System.Drawing.Point(89, 243);
+         this.panel1.Location = new System.Drawing.Point(90, 240);
          this.panel1.Name = "panel1";
          this.panel1.Size = new System.Drawing.Size(500, 500);
          this.panel1.TabIndex = 0;
