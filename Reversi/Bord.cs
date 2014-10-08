@@ -85,14 +85,47 @@ namespace Reversi
         {
             if (beurtBlauw)
             {
-                if (Stenen[x - (w-2), y] == Bord.ROOD && Stenen[x - ((w-2)-1), y] == Bord.BLAUW)
+                for (int i = 0; i < x; i++)
                 {
-                    return true;
+                    if (Stenen[i, y] == Bord.BLAUW)
+                    {
+                        int j = i+1;
+                        for (i = j; i<x; i++)
+                        {
+                            if (Stenen[i, y] != Bord.ROOD)
+                            {
+                                return false;
+                            }
+                            else
+                                return true;
+                        }
+                    }
                 }
-                else
+
+                for (int i = w; i > x; i = i-1)
                 {
-                    return false;
+                    if (Stenen[i, y] == Bord.BLAUW)
+                    {
+                        int j = i-1;
+                        for (i = j; i > x; i = i-1)
+                        {
+                            if (Stenen[i, y] != Bord.ROOD)
+                            {
+                                return false;
+                            }
+                            else
+                                return true;
+                        }
+                    }
                 }
+                    if (Stenen[x - 1, y] == Bord.ROOD && Stenen[x - 2, y] == Bord.BLAUW)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
             }
             if (beurtRood)
             {
