@@ -50,6 +50,7 @@
     <Compile Include="ReversiForm.Designer.cs">
       <DependentUpon>ReversiForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bord.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
