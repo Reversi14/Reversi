@@ -11,7 +11,8 @@ namespace Reversi
         public int[,] Stenen;
         public int w;                                   // Aantal vakjes breed
         public int h;                                   // Aantal vakjes hoog
-        bool beurt = true;                              // Beurt aangeven
+        bool beurtBlauw = true;                              // Beurt aangeven
+        bool beurtRood;
         public const int LEEG = -1;
         public const int BLAUW = 0;
         public const int ROOD = 1;
@@ -50,17 +51,19 @@ namespace Reversi
         {
             if (isLeeg(x, y))
             {
-                if (beurt)
+                if (beurtBlauw)
                     Stenen[x, y] = BLAUW;
                 else
                     Stenen[x, y] = ROOD;
 
                 wisselBeurt();
+                ValidMove();
             }
         }
         private void wisselBeurt()
         {
-            beurt = !beurt;
+            beurtRood = !beurtBlauw;
+            beurtBlauw = beurtRood;
         }
         public int GetScore(int Speler)
         {
@@ -68,9 +71,9 @@ namespace Reversi
 
             for (int i = 0; i < w; i++)
             {
-                for (int j =0; j<h; j++)
+                for (int j = 0; j < h; j++)
                 {
-                    if(Stenen[i,j] == Speler)
+                    if (Stenen[i, j] == Speler)
                     {
                         result++;
                     }
@@ -78,6 +81,31 @@ namespace Reversi
             }
             return result;
         }
+        public bool ValidMove(int x, int y)
+        {
+            if (beurtBlauw)
+            {
+                if (Stenen[x - (w-2), y] == Bord.ROOD && Stenen[x - ((w-2)-1), y] == Bord.BLAUW)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (beurtRood)
+            {
+                if (Stenen[x - 1, y] == Bord.BLAUW && Stenen[x - 2, y] == Bord.ROOD)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }           
 
+        }
     }
 }
