@@ -12,15 +12,14 @@ namespace Reversi
 {
    public partial class ReversiForm : Form
    {
-      Rectangle[,] rect;                           // rechthoekige array
+      bool beurt = false;                          // beurt aangeven
       Rectangle[,] steen;                          // stenen in de array
+      Rectangle[,] rect;                           // rechthoekige array      
       int[,] Bord;                                 // waardes in de array
-      int w = 6;                                   // aantal vakjes breed
-      int h = 6;                                   // aantal vakjes hoog
-      int X, Y;
-      bool beurt = false;
-
-
+      int w = 8;                                   // aantal vakjes breed
+      int h = 8;                                   // aantal vakjes hoog
+      int X, Y;                                    // muis X en Y locatie
+      
       public ReversiForm()
       {
          InitializeComponent();
@@ -52,27 +51,21 @@ namespace Reversi
           X = e.X;
           Y = e.Y;
 
-          int a, b;
+          int i, j;
+          i = X / (panel1.Width / w);
+          j = Y / (panel1.Height / h);
 
-          a = X / (panel1.Width / w);
-          b = Y / (panel1.Height / h);
+          this.Text = String.Format("{0},{1},{2}", Bord[i, j], i, j);
 
-          this.Text = String.Format("{0},{1}", a, b);
-
-          if ( Bord[a,b] == -1)
+          if ( Bord[i, j] == -1)
           {
               if (beurt)
-              {
-                  Bord[a, b] = 0;
-              }
+                  Bord[i, j] = 0;
               else
-              {
-                  Bord[a, b] = 1;
-              }
+                  Bord[i, j] = 1;
+              
               beurt = !beurt;
           }
-          
-
           panel1.Invalidate();
       }
 
@@ -84,42 +77,42 @@ namespace Reversi
          Graphics g = pea.Graphics;
          Pen blackPen = new Pen(Brushes.Black, 1);  
 
-         for (int x = 0; x < w; x++)
+         for (int i = 0; i < w; i++)
          {
-            for (int y = 0; y < h; y++)
+            for (int j = 0; j < h; j++)
             {
                // Vormgeving bord + alle arrays krijgen waarde -1
-               rect[x, y] = new Rectangle(x * breedteVakje, y * hoogteVakje, breedteVakje, hoogteVakje);
-               g.DrawRectangle(blackPen, rect[x, y]);
-
-               Bord[x, y] = -1;
+               rect[i, j] = new Rectangle(i * breedteVakje, j * hoogteVakje, breedteVakje, hoogteVakje);
+               g.DrawRectangle(blackPen, rect[i, j]);               
 
                // Vormgeving van stenen.
                // Optel en aftrek handelingen zorgen ervoor dat de steen kleiner dan de rechthoek is
                // en in het midden van de rechthoek.
-               steen[x, y] = new Rectangle(x * breedteVakje + 2, y * hoogteVakje + 2, breedteVakje - 3, hoogteVakje - 3);
+               steen[i, j] = new Rectangle(i * breedteVakje + 2, j * hoogteVakje + 2, breedteVakje - 3, hoogteVakje - 3);
+
+               Bord[i, j] = -1;
             }
          }
          int a = w / 2;    // midden bord horizontaal.
          int b = h / 2;    // midden bord verticaal.
 
          // Beginstand bord d.m.v. waardebepaling.
-         Bord[a - 1, b - 1] = 0;
          Bord[a, b] = 0;
+         Bord[a - 1, b - 1] = 0;         
 
          Bord[a - 1, b] = 1;
          Bord[a, b - 1] = 1;
 
          // Deze waardebepaling hierboven kleur steen toewijzen.
-         for (int x = 0; x < w; x++)
+         for (int i = 0; i < w; i++)
          {
-            for (int y = 0; y < h; y++)
-            {
-               if (Bord[x, y] == 0) // blauwe stenen
-                  g.DrawImage(Reversi.Properties.Resources.img_blue, steen[x, y]);
+            for (int j = 0; j < h; j++)
+            {               
+               if (Bord[i, j] == 0) // blauwe stenen
+                  g.DrawImage(Reversi.Properties.Resources.img_blue, steen[i, j]);
 
-               else if (Bord[x, y] == 1) // rode stenen
-                  g.DrawImage(Reversi.Properties.Resources.img_red, steen[x, y]);               
+               else if (Bord[i, j] == 1) // rode stenen
+                  g.DrawImage(Reversi.Properties.Resources.img_red, steen[i, j]);     
             }
          }
       }
