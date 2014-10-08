@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Reversi
 {
-   public partial class ReversiForm : Form  // hoerrrrrr
+   public partial class ReversiForm : Form
    {
       Rectangle[,] rect;                           // rechthoekige array
       Rectangle[,] steen;                          // stenen in de array
@@ -32,15 +32,27 @@ namespace Reversi
       }
       void ReversiForm_Paint(object sender, PaintEventArgs pea)
       {
+<<<<<<< Updated upstream
          // Tekent een rode en blauwe steen bij aantalen stenen voor de spelers.
          Graphics g = pea.Graphics;
          g.DrawImage(Reversi.Properties.Resources.img_blue, 65, 68, 15, 15);
          g.DrawImage(Reversi.Properties.Resources.img_red, 65, 95, 15, 15);
+=======
+           
+>>>>>>> Stashed changes
       }
 
       void panel1_MouseMove(object sender, MouseEventArgs e)
       {
+<<<<<<< Updated upstream
          this.Invalidate();
+=======
+          Label Positie = new Label();
+          Positie.Location = new Point(0, 0);
+          Positie.Text = e.X + "";
+          this.Controls.Add(Positie);
+         panel1.Invalidate();
+>>>>>>> Stashed changes
          DoubleBuffered = true;
       }
 
@@ -76,8 +88,8 @@ namespace Reversi
                steen[x, y] = new Rectangle(x * breedteVakje + 2, y * hoogteVakje + 2, breedteVakje - 3, hoogteVakje - 3);
             }
          }
-         int a = w / 2;    // midden bord horizontaal.
-         int b = h / 2;    // midden bord verticaal.
+         int a = w / 2;    //midden bord horizontaal.
+         int b = h / 2;    //midden bord verticaal.
 
          // Beginstand bord d.m.v. waardebepaling.
          Bord[a - 1, b - 1] = 0;
