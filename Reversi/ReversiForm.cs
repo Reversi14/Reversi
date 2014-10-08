@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Reversi
 {
-   public partial class ReversiForm : Form
+   public partial class ReversiForm : Form  // bitchhhh
    {
       Rectangle[,] rect;                           // rechthoekige array
       Rectangle[,] steen;                          // stenen in de array
@@ -76,8 +76,8 @@ namespace Reversi
                steen[x, y] = new Rectangle(x * breedteVakje + 2, y * hoogteVakje + 2, breedteVakje - 3, hoogteVakje - 3);
             }
          }
-         int a = w / 2;    //midden bord horizontaal.
-         int b = h / 2;    //midden bord verticaal.
+         int a = w / 2;    // midden bord horizontaal.
+         int b = h / 2;    // midden bord verticaal.
 
          // Beginstand bord d.m.v. waardebepaling.
          Bord[a - 1, b - 1] = 0;
