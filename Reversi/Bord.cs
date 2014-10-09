@@ -86,7 +86,7 @@ namespace Reversi
                 {
                     if (isLeeg(dx, y))
                         return false;
-                    if (isBlauw(dx, y))
+                    if (isBlauw(dx, y) || isRood(dx, y))
                         return true;
                 }
             }
@@ -96,7 +96,7 @@ namespace Reversi
                 {
                     if (isLeeg(dx, y))
                         return false;
-                    if (isRood(dx, y))
+                    if (isRood(dx, y) || isBlauw(dx, y))
                         return true;
                 }
             }
@@ -108,7 +108,6 @@ namespace Reversi
         public int GetScore(int Speler)
         {
             int result = 0;
-
             for (int i = 0; i < w; i++)
             {
                 for (int j = 0; j < h; j++)
