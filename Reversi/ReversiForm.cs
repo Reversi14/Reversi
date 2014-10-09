@@ -16,11 +16,12 @@ namespace Reversi
         Rectangle[,] rect;                           // Rechthoekige array 
         Bord bord;                                   // Waardes in de array
         int X, Y;                                    // Muis X en Y locatie
+        bool Gameover;
 
         public ReversiForm()
         {
             InitializeComponent();
-            bord = new Bord(6,6);
+            bord = new Bord(8,8);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
 
@@ -91,5 +92,31 @@ namespace Reversi
                 }
             }
         }
+        /* 
+        public void UpdateStatus()
+        {
+            if ()
+            {
+                int velden1 = bord.GetScore(Bord.BLAUW);
+                int velden2 = bord.GetScore(Bord.ROOD);
+                if (velden1 > velden2)
+                {
+                    label3.Text = String.Format("{0} heeft gewonnen!");
+                }
+                else if ( velden2 > velden1)
+                {
+                    label3.Text = String.Format("{0} heeft gewonnen!");
+                }
+                else 
+                {
+                    label3.Text = String.Format("Het is een gelijkspel" );
+                }
+            }
+            else 
+            {
+                label3.Text = String.Format("De beurt is aan {0}" );
+            }
+        }
+        */
     }
 }

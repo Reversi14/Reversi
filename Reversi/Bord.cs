@@ -9,11 +9,10 @@ namespace Reversi
     class Bord
     {
         public int[,] Stenen;
-        public int w;                                   // Aantal vakjes breed
-        public int h;                                   // Aantal vakjes hoog
-        bool beurtBlauw = true;                              // Beurt aangeven
-        bool beurtRood;
-        bool f;
+        public int w;
+        public int h;
+        public bool beurtBlauw = true;
+        public bool beurtRood;
         public const int LEEG = -1;
         public const int BLAUW = 0;
         public const int ROOD = 1;
@@ -43,10 +42,21 @@ namespace Reversi
             Stenen[a - 1, b] = ROOD;
             Stenen[a, b - 1] = ROOD;
         }
+
+        #region Definities vakjes waarde
         bool isLeeg(int x, int y)
         {
             return Stenen[x, y] == LEEG;
         }
+        bool isBlauw(int x, int y)
+        {
+            return Stenen[x, y] == BLAUW;
+        }
+        bool isRood(int x, int y)
+        {
+            return Stenen[x, y] == ROOD;
+        }
+        #endregion
 
         public void Click(int x, int y)
         {
@@ -58,7 +68,7 @@ namespace Reversi
                     Stenen[x, y] = ROOD;
 
                 wisselBeurt();
-                // ValidMoveHorizontaal();
+                validMove(x, y);
             }
         }
         private void wisselBeurt()
@@ -66,6 +76,35 @@ namespace Reversi
             beurtRood = !beurtBlauw;
             beurtBlauw = beurtRood;
         }
+
+        #region Horizontaal Check
+        private bool validMove(int x, int y)
+        {
+            if (isBlauw(x, y) && isRood(x + 1, y))
+            {
+                for (int dx = x + 2; dx < w; dx++)
+                {
+                    if (isLeeg(dx, y))
+                        return false;
+                    if (isBlauw(dx, y))
+                        return true;
+                }
+            }
+            else if (isRood(x, y) && isBlauw(x + 1, y))
+            {
+                for (int dx = x + 2; dx < w; dx++)
+                {
+                    if (isLeeg(dx, y))
+                        return false;
+                    if (isRood(dx, y))
+                        return true;
+                }
+            }
+            else { return false; }
+            return false;
+        }
+        #endregion 
+
         public int GetScore(int Speler)
         {
             int result = 0;
@@ -82,98 +121,5 @@ namespace Reversi
             }
             return result;
         }
-
-        public bool ValidMoveHorizontaal(int x, int y)
-        {
-            if (beurtBlauw)
-            {
-                for (int i = 0; i < x; i++)
-                {
-                    if (Stenen[i, y] != BLAUW)
-                        return false;
-                    else
-                    {
-                        int j = i + 1;
-                        for (i = j; i < x; i++)
-                        {
-                            if (Stenen[i, y] != ROOD)
-                            {
-                                f = false;
-                            }
-                        }
-                        if (f)
-                            return false;
-                        else
-                            return true;
-                    }
-                }
-
-                for (int i = w; i > x; i -= 1)
-                {
-                    if (Stenen[i, y] != BLAUW)
-                        return false;
-                    else
-                    {
-                        int j = i - 1;
-                        for (i = j; i > x; i = i - 1)
-                        {
-                            if (Stenen[i, y] != ROOD)
-                            {
-                                f = false;
-                            }
-                        }
-                        if (f)
-                            return false;
-                        else
-                            return true;
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < x; i++)
-                {
-                    if (Stenen[i, y] != ROOD)
-                        return false;
-                    else
-                    {
-                        int j = i + 1;
-                        for (i = j; i < x; i++)
-                        {
-                            if (Stenen[i, y] != BLAUW)
-                            {
-                                f = false;
-                            }
-                        }
-                        if (f)
-                            return false;
-                        else
-                            return true;
-                    }
-                }
-
-                for (int i = w; i > x; i -= 1)
-                {
-                    if (Stenen[i, y] != ROOD)
-                        return false;
-                    else
-                    {
-                        int j = i - 1;
-                        for (i = j; i > x; i = i - 1)
-                        {
-                            if (Stenen[i, y] != BLAUW)
-                            {
-                                f = false;
-                            }
-                        }
-                        if (f)
-                            return false;
-                        else
-                            return true;
-                    }
-                }
-            }
-        }
-        
     }
 }
