@@ -67,7 +67,13 @@ namespace Reversi
 
         public bool endGame()
         {
-            return Score(Bord.BLAUW) + Score(Bord.ROOD) == (w * h);
+            for (int p = 0; p < w; p++)
+                for (int q = 0; q < h; q++)
+                {
+                    if (geldigeZet(p, q))
+                        return false;
+                }
+            return true;
         }
 
         public void Click(int x, int y)
