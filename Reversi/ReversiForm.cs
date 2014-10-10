@@ -16,10 +16,12 @@ namespace Reversi
         Rectangle[,] rect;
         Bord bord;
         int X, Y;
+        bool hulp;
         
         public ReversiForm()
         {
             InitializeComponent();
+            hulp = false;
             bord = new Bord(8,8);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
@@ -89,8 +91,19 @@ namespace Reversi
 
                     else if (bord.isRood(i, j)) // rode stenen
                         g.DrawImage(Reversi.Properties.Resources.img_red, steen[i, j]);
+
+                    if (bord.validMove(i, j) && hulp)
+                    {
+                        g.DrawRectangle(Pens.Black, i * breedteVakje + 4, j * hoogteVakje + 4, breedteVakje - 8, hoogteVakje - 8);
+                    }
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            hulp = !hulp;
+            Invalidate();
         }
         /* 
         public void UpdateStatus()

@@ -60,6 +60,7 @@ namespace Reversi
 
         public void Click(int x, int y)
         {
+
             if (isLeeg(x, y) && validMove(x,y))
             {
                 if (beurt)
@@ -67,38 +68,19 @@ namespace Reversi
                 else
                     Stenen[x, y] = ROOD;
 
+                Color(x, y);
                 wisselBeurt();
-                CheckMove(x, y);
+                
                 
             }
         }
         private void wisselBeurt()
         {
-            beurt = !beurt;
-        }
-        private void switchColor(int x1, int x2, int y1, int y2, int dx, int dy)
-        {
-            int p = x1;
-            int q = y1;
-
-            int b;
-
-            if (beurt)
-                b = BLAUW;
-            else
-                b = ROOD;
-
-            while ( (p > x2 && dx == -1) || (p < x2 && dx == 1) || (q > y2 && dy == -1) || (q < y2 && dy == 1))
-            {
-                Stenen[p, q] = b;
-
-                p += dx;
-                q += dy;
-            }
-
+            beurt = !beurt;            
 
         }
-        private void CheckMove(int x, int y)
+        
+        private void Color(int x, int y)
         {
             int b;
             int dx;
@@ -141,9 +123,30 @@ namespace Reversi
                 }
             }
         }
+        private void switchColor(int x1, int x2, int y1, int y2, int dx, int dy)
+        {
+            int p = x1;
+            int q = y1;
+
+            int b;
+
+            if (beurt)
+                b = BLAUW;
+            else
+                b = ROOD;
+
+            while ((p > x2 && dx == -1) || (p < x2 && dx == 1) || (q > y2 && dy == -1) || (q < y2 && dy == 1))
+            {
+                Stenen[p, q] = b;
+
+                p += dx;
+                q += dy;
+            }
 
 
-        private bool validMove(int x, int y)
+        }
+
+        public bool validMove(int x, int y)
         {
             int b;
             int dx;
