@@ -21,8 +21,8 @@ namespace Reversi
         public ReversiForm()
         {
             InitializeComponent();
-            hulp = true;
-            bord = new Bord(6, 6);
+            hulp = false;
+            bord = new Bord(4, 4);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
 
@@ -61,7 +61,7 @@ namespace Reversi
             label1.Text = string.Format("heeft {0} veld(en)", bord.Score(Bord.BLAUW));
             label2.Text = string.Format("heeft {0} veld(en)", bord.Score(Bord.ROOD));
 
-            if ((bord.Score(Bord.BLAUW) + bord.Score(Bord.ROOD)) == (bord.w * bord.h))
+            if (bord.endGame())
             {
                 if (bord.Score(Bord.BLAUW) > bord.Score(Bord.ROOD))
                 {
@@ -78,7 +78,7 @@ namespace Reversi
             }
             else
             {
-                label3.Text = String.Format("... aan zet");
+                label3.Text = String.Format("{0} aan zet...", bord.Spelers());
             }
             
            

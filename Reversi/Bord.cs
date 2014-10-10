@@ -65,6 +65,11 @@ namespace Reversi
         }
         #endregion
 
+        public bool endGame()
+        {
+            return Score(Bord.BLAUW) + Score(Bord.ROOD) == (w * h);
+        }
+
         public void Click(int x, int y)
         {
             if (isLeeg(x, y) && geldigeZet(x,y))
@@ -79,7 +84,7 @@ namespace Reversi
                 
             }
         }
-        private void wisselBeurt()
+        public void wisselBeurt()
         {
             beurt = !beurt;
         }
@@ -204,6 +209,14 @@ namespace Reversi
                 }
             }
             return result;
+        }
+        public string Spelers()
+        {
+            string res = "";
+            if (beurt)
+                return res += "Blauw";
+            else
+                return res += "Rood";
         }
     }
 }
