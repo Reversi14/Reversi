@@ -21,8 +21,8 @@ namespace Reversi
         public ReversiForm()
         {
             InitializeComponent();
-            hulp = false;
-            bord = new Bord(8,8);
+            hulp = true;
+            bord = new Bord(6, 6);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
 
@@ -36,8 +36,7 @@ namespace Reversi
             // Tekent een rode en blauwe steen bij aantalen stenen voor de spelers.
             Graphics g = pea.Graphics;
             g.DrawImage(Reversi.Properties.Resources.img_blue, 65, 68, 15, 15);
-            g.DrawImage(Reversi.Properties.Resources.img_red, 65, 95, 15, 15);
-            
+            g.DrawImage(Reversi.Properties.Resources.img_red, 65, 95, 15, 15);           
 
         }
 
@@ -50,7 +49,7 @@ namespace Reversi
             i = X / (panel1.Width / bord.w);
             j = Y / (panel1.Height / bord.h);
 
-            bord.Click(i, j);            
+            bord.Click(i, j);
            
             panel1.Invalidate();
             DoubleBuffered = true;
@@ -61,8 +60,29 @@ namespace Reversi
             int breedteVakje = panel1.Width / bord.w;
             int hoogteVakje = panel1.Height / bord.h;
 
-            label1.Text = string.Format("heeft {0} veld(en)", bord.GetScore(Bord.BLAUW));
-            label2.Text = string.Format("heeft {0} veld(en)", bord.GetScore(Bord.ROOD));
+            label1.Text = string.Format("heeft {0} veld(en)", bord.Score(Bord.BLAUW));
+            label2.Text = string.Format("heeft {0} veld(en)", bord.Score(Bord.ROOD));
+
+            if ((bord.Score(Bord.BLAUW) + bord.Score(Bord.ROOD)) == (bord.w * bord.h))
+            {
+                if (bord.Score(Bord.BLAUW) > bord.Score(Bord.ROOD))
+                {
+                    label3.Text = String.Format("Blauw heeft gewonnen!");
+                }
+                else if (bord.Score(Bord.ROOD) > bord.Score(Bord.BLAUW))
+                {
+                    label3.Text = String.Format("Rood heeft gewonnen!");
+                }
+                else
+                {
+                    label3.Text = String.Format("Revanche!?");
+                }
+            }
+            else
+            {
+                label3.Text = String.Format("... aan zet");
+            }
+            
            
             Graphics g = pea.Graphics;
             Pen blackPen = new Pen(Brushes.Black, 1);
@@ -92,7 +112,7 @@ namespace Reversi
                     else if (bord.isRood(i, j)) // rode stenen
                         g.DrawImage(Reversi.Properties.Resources.img_red, steen[i, j]);
 
-                    if (bord.validMove(i, j) && hulp)
+                    if (bord.geldigeZet(i, j) && hulp)
                     {
                         g.DrawRectangle(Pens.Black, i * breedteVakje + 4, j * hoogteVakje + 4, breedteVakje - 8, hoogteVakje - 8);
                     }
@@ -100,36 +120,17 @@ namespace Reversi
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bord.NieuwSpel();
+            panel1.Invalidate();
+        } 
+
         private void button2_Click(object sender, EventArgs e)
         {
             hulp = !hulp;
             panel1.Invalidate();
         }
-        /* 
-        public void UpdateStatus()
-        {
-            if ()
-            {
-                int blauw = bord.GetScore(Bord.BLAUW);
-                int rood = bord.GetScore(Bord.ROOD);
-                if ( blauw > rood )
-                {
-                    label3.Text = String.Format("{0} heeft gewonnen!", );
-                }
-                else if ( rood > blauw )
-                {
-                    label3.Text = String.Format("{0} heeft gewonnen!", );
-                }
-                else 
-                {
-                    label3.Text = String.Format("Het is een gelijkspel", );
-                }
-            }
-            else 
-            {
-                label3.Text = String.Format("De beurt is aan {0}", );
-            }
-        }
-        */
+       
     }
 }

@@ -12,7 +12,7 @@ namespace Reversi
         public int[,] Stenen;
         public int w;
         public int h;
-        public bool beurt = true;
+        public bool beurt;
         public const int LEEG = -1;
         public const int BLAUW = 0;
         public const int ROOD = 1;
@@ -22,6 +22,13 @@ namespace Reversi
             this.w = w;
             this.h = h;
             Stenen = new int[w, h];
+
+            NieuwSpel();            
+        }
+        
+        public void NieuwSpel()
+        {
+            beurt = true;
 
             // Declaraties van bord waarden.
             for (int i = 0; i < w; i++)
@@ -60,27 +67,24 @@ namespace Reversi
 
         public void Click(int x, int y)
         {
-
-            if (isLeeg(x, y) && validMove(x,y))
+            if (isLeeg(x, y) && geldigeZet(x,y))
             {
                 if (beurt)
                     Stenen[x, y] = BLAUW;
                 else
                     Stenen[x, y] = ROOD;
 
-                Color(x, y);
+                Kleur(x, y);
                 wisselBeurt();
-                
                 
             }
         }
         private void wisselBeurt()
         {
-            beurt = !beurt;            
-
+            beurt = !beurt;
         }
         
-        private void Color(int x, int y)
+        public void Kleur(int x, int y)
         {
             int b;
             int dx;
@@ -105,9 +109,9 @@ namespace Reversi
                                 break;
                             if (Stenen[i, j] == b)
                             {
-                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == -1))
+                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == -1) && isLeeg(i,j))
                                 {
-                                    switchColor(x, y, i, j, dx, dy);
+                                    wisselKleur(x, y, i, j, dx, dy);
                                     break;
                                 }
                                 else
@@ -123,7 +127,8 @@ namespace Reversi
                 }
             }
         }
-        private void switchColor(int x1, int x2, int y1, int y2, int dx, int dy)
+
+        private void wisselKleur(int x1, int x2, int y1, int y2, int dx, int dy)
         {
             int p = x1;
             int q = y1;
@@ -142,11 +147,9 @@ namespace Reversi
                 p += dx;
                 q += dy;
             }
-
-
         }
 
-        public bool validMove(int x, int y)
+        public bool geldigeZet(int x, int y)
         {
             int b;
             int dx;
@@ -188,7 +191,7 @@ namespace Reversi
             return false;
         }
 
-        public int GetScore(int Speler)
+        public int Score(int Speler)
         {
             int result = 0;
             for (int i = 0; i < w; i++)
