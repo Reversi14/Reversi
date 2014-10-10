@@ -74,7 +74,7 @@ namespace Reversi
                 else
                     Stenen[x, y] = ROOD;
 
-                Kleur(x, y);
+                omslagKleur(x, y);
                 wisselBeurt();
                 
             }
@@ -84,7 +84,7 @@ namespace Reversi
             beurt = !beurt;
         }
         
-        public void Kleur(int x, int y)
+        public void omslagKleur(int x, int y)
         {
             int b;
             int dx;
@@ -109,7 +109,7 @@ namespace Reversi
                                 break;
                             if (Stenen[i, j] == b)
                             {
-                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == -1) && isLeeg(i,j))
+                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1  && dy == 1) || (j < y - 1 && dy == -1) && isLeeg(i,j))
                                 {
                                     wisselKleur(x, y, i, j, dx, dy);
                                     break;
@@ -132,7 +132,6 @@ namespace Reversi
         {
             int p = x1;
             int q = y1;
-
             int b;
 
             if (beurt)

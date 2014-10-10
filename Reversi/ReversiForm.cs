@@ -21,7 +21,7 @@ namespace Reversi
         public ReversiForm()
         {
             InitializeComponent();
-            hulp = true;
+            hulp = false;
             bord = new Bord(6, 6);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
@@ -33,11 +33,9 @@ namespace Reversi
 
         void ReversiForm_Paint(object sender, PaintEventArgs pea)
         {
-            // Tekent een rode en blauwe steen bij aantalen stenen voor de spelers.
-            Graphics g = pea.Graphics;
-            g.DrawImage(Reversi.Properties.Resources.img_blue, 65, 68, 15, 15);
-            g.DrawImage(Reversi.Properties.Resources.img_red, 65, 95, 15, 15);           
-
+            // Tekent een rode en blauwe steen op het form.
+            pea.Graphics.DrawImage(Reversi.Properties.Resources.img_blue, 105, 68, 15, 15);
+            pea.Graphics.DrawImage(Reversi.Properties.Resources.img_red, 105, 95, 15, 15);
         }
 
         public void panel1_MouseClick(object sender, MouseEventArgs e)
@@ -86,6 +84,10 @@ namespace Reversi
            
             Graphics g = pea.Graphics;
             Pen blackPen = new Pen(Brushes.Black, 1);
+            // afstand en bepaling  voor de steen en hulp rechthoek.
+            int a = 2;
+            int b = 2 * a;
+            int c = 2 * b;
 
             for (int i = 0; i < bord.w; i++)
             {
@@ -97,7 +99,7 @@ namespace Reversi
                     // Vormgeving van stenen.
                     // Optel en aftrek handelingen zorgen ervoor dat de steen kleiner dan de rechthoek is
                     // en in het midden van de rechthoek.
-                    steen[i, j] = new Rectangle(i * breedteVakje + 2, j * hoogteVakje + 2, breedteVakje - 3, hoogteVakje - 3);
+                    steen[i, j] = new Rectangle(i * breedteVakje + a, j * hoogteVakje + a, breedteVakje - b, hoogteVakje - b);
                 }
             }
 
@@ -114,7 +116,7 @@ namespace Reversi
 
                     if (bord.geldigeZet(i, j) && hulp)
                     {
-                        g.DrawRectangle(Pens.Black, i * breedteVakje + 4, j * hoogteVakje + 4, breedteVakje - 8, hoogteVakje - 8);
+                        g.DrawRectangle(Pens.Black, i * breedteVakje + b, j * hoogteVakje + b, breedteVakje - c, hoogteVakje - c);
                     }
                 }
             }
@@ -127,6 +129,11 @@ namespace Reversi
         } 
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             hulp = !hulp;
             panel1.Invalidate();
