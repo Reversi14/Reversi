@@ -109,7 +109,7 @@ namespace Reversi
                                 break;
                             if (Stenen[i, j] == b)
                             {
-                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1  && dy == 1) || (j < y - 1 && dy == -1) && isLeeg(i,j))
+                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1  && dy == 1) || (j < y - 1 && dy == -1))
                                 {
                                     wisselKleur(x, y, i, j, dx, dy);
                                     break;
@@ -128,7 +128,7 @@ namespace Reversi
             }
         }
 
-        private void wisselKleur(int x1, int x2, int y1, int y2, int dx, int dy)
+        private void wisselKleur(int x1, int y1, int x2, int y2, int dx, int dy)
         {
             int p = x1;
             int q = y1;

@@ -21,7 +21,7 @@ namespace Reversi
         public ReversiForm()
         {
             InitializeComponent();
-            hulp = false;
+            hulp = true;
             bord = new Bord(6, 6);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
