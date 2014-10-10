@@ -35,6 +35,8 @@ namespace Reversi
             Graphics g = pea.Graphics;
             g.DrawImage(Reversi.Properties.Resources.img_blue, 65, 68, 15, 15);
             g.DrawImage(Reversi.Properties.Resources.img_red, 65, 95, 15, 15);
+            
+
         }
 
         public void panel1_MouseClick(object sender, MouseEventArgs e)
