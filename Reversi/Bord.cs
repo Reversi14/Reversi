@@ -171,7 +171,7 @@ namespace Reversi
                                 break;
                             if (Stenen[i,j] == b)
                             {
-                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == -1))
+                                if (((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == -1)) && isLeeg(x, y))
                                     return true;
                                 else
                                     break;

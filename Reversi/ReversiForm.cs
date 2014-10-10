@@ -103,7 +103,7 @@ namespace Reversi
         private void button2_Click(object sender, EventArgs e)
         {
             hulp = !hulp;
-            Invalidate();
+            panel1.Invalidate();
         }
         /* 
         public void UpdateStatus()
