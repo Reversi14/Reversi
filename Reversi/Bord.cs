@@ -11,8 +11,7 @@ namespace Reversi
         public int[,] Stenen;
         public int w;
         public int h;
-        public bool beurtBlauw = true;
-        public bool beurtRood;
+        public bool beurt = true;
         public const int LEEG = -1;
         public const int BLAUW = 0;
         public const int ROOD = 1;
@@ -43,16 +42,16 @@ namespace Reversi
             Stenen[a, b - 1] = ROOD;
         }
 
-        #region Definities vakjes waarde
-        bool isLeeg(int x, int y)
+        #region Definities vakjes waarde (isLeeg, -Blauw en -Rood)
+        public bool isLeeg(int x, int y)
         {
             return Stenen[x, y] == LEEG;
         }
-        bool isBlauw(int x, int y)
+        public bool isBlauw(int x, int y)
         {
             return Stenen[x, y] == BLAUW;
         }
-        bool isRood(int x, int y)
+        public bool isRood(int x, int y)
         {
             return Stenen[x, y] == ROOD;
         }
@@ -60,50 +59,63 @@ namespace Reversi
 
         public void Click(int x, int y)
         {
-            if (isLeeg(x, y))
+            if (isLeeg(x, y) && validMove(x,y))
             {
-                if (beurtBlauw)
+                if (beurt)
                     Stenen[x, y] = BLAUW;
                 else
                     Stenen[x, y] = ROOD;
 
                 wisselBeurt();
-                validMove(x, y);
+                
             }
         }
         private void wisselBeurt()
         {
-            beurtRood = !beurtBlauw;
-            beurtBlauw = beurtRood;
+            beurt = !beurt;
         }
 
         #region Horizontaal Check
         private bool validMove(int x, int y)
         {
-            if (isBlauw(x, y) && isRood(x + 1, y))
+            int b;
+
+            if (beurt)
+                b = BLAUW;
+            else
+                b = ROOD;
+
+            for ( int dx = -1; dx < 2; dx++)
             {
-                for (int dx = x + 2; dx < w; dx++)
+                for ( int dy = -1; dy < 2; dy++)
                 {
-                    if (isLeeg(dx, y))
-                        return false;
-                    if (isBlauw(dx, y) || isRood(dx, y))
-                        return true;
+                    if( !(dx == 0 && dy == 0))
+                    {
+                        int i = x + dx;
+                        int j = y + dy;
+                        while( i >= 0 && j >= 0 && i < x && j < y)
+                        {
+                            if (isLeeg(i, j))
+                                break;
+                            if (Stenen[i,j] == b)
+                            {
+                                if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == 1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == 1) && isLeeg(i, j))
+                                    return true;
+                                else
+                                    break;
+                            }
+                            if (Stenen[i, j] !=b)
+                            {
+                                i += dx;
+                                j += dy;
+                            }                            
+                        }
+                    }
                 }
             }
-            else if (isRood(x, y) && isBlauw(x + 1, y))
-            {
-                for (int dx = x + 2; dx < w; dx++)
-                {
-                    if (isLeeg(dx, y))
-                        return false;
-                    if (isRood(dx, y) || isBlauw(dx, y))
-                        return true;
-                }
-            }
-            else { return false; }
             return false;
         }
-        #endregion 
+        #endregion
 
         public int GetScore(int Speler)
         {

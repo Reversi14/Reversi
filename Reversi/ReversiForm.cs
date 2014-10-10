@@ -12,12 +12,11 @@ namespace Reversi
 {
     public partial class ReversiForm : Form
     {
-        Rectangle[,] steen;                          // Stenen in de array
-        Rectangle[,] rect;                           // Rechthoekige array 
-        Bord bord;                                   // Waardes in de array
-        int X, Y;                                    // Muis X en Y locatie
-        bool Gameover;
-
+        Rectangle[,] steen;
+        Rectangle[,] rect;
+        Bord bord;
+        int X, Y;
+        
         public ReversiForm()
         {
             InitializeComponent();
@@ -29,6 +28,7 @@ namespace Reversi
             panel1.Paint += panel1_Paint;
             panel1.MouseClick += panel1_MouseClick;            
         }
+
         void ReversiForm_Paint(object sender, PaintEventArgs pea)
         {
             // Tekent een rode en blauwe steen bij aantalen stenen voor de spelers.
@@ -52,7 +52,6 @@ namespace Reversi
             DoubleBuffered = true;
         }
 
-
         public void panel1_Paint(object obj, PaintEventArgs pea)
         {
             int breedteVakje = panel1.Width / bord.w;
@@ -68,7 +67,6 @@ namespace Reversi
             {
                 for (int j = 0; j < bord.h; j++)
                 {
-                    // Vormgeving bord + alle arrays krijgen waarde -1
                     rect[i, j] = new Rectangle(i * breedteVakje, j * hoogteVakje, breedteVakje, hoogteVakje);
                     g.DrawRectangle(blackPen, rect[i, j]);
 
@@ -79,15 +77,15 @@ namespace Reversi
                 }
             }
 
-            // Deze waardebepaling hierboven kleur steen toewijzen.
+            // Kleur steen toewijzen.
             for (int i = 0; i < bord.w; i++)
             {
                 for (int j = 0; j < bord.h; j++)
                 {
-                    if (bord.Stenen[i, j] == Bord.BLAUW) // blauwe stenen
+                    if (bord.isBlauw(i, j)) // blauwe stenen
                         g.DrawImage(Reversi.Properties.Resources.img_blue, steen[i, j]);
 
-                    else if (bord.Stenen[i, j] == Bord.ROOD) // rode stenen
+                    else if (bord.isRood(i, j)) // rode stenen
                         g.DrawImage(Reversi.Properties.Resources.img_red, steen[i, j]);
                 }
             }
@@ -97,24 +95,24 @@ namespace Reversi
         {
             if ()
             {
-                int velden1 = bord.GetScore(Bord.BLAUW);
-                int velden2 = bord.GetScore(Bord.ROOD);
-                if (velden1 > velden2)
+                int blauw = bord.GetScore(Bord.BLAUW);
+                int rood = bord.GetScore(Bord.ROOD);
+                if ( blauw > rood )
                 {
-                    label3.Text = String.Format("{0} heeft gewonnen!");
+                    label3.Text = String.Format("{0} heeft gewonnen!", );
                 }
-                else if ( velden2 > velden1)
+                else if ( rood > blauw )
                 {
-                    label3.Text = String.Format("{0} heeft gewonnen!");
+                    label3.Text = String.Format("{0} heeft gewonnen!", );
                 }
                 else 
                 {
-                    label3.Text = String.Format("Het is een gelijkspel" );
+                    label3.Text = String.Format("Het is een gelijkspel", );
                 }
             }
             else 
             {
-                label3.Text = String.Format("De beurt is aan {0}" );
+                label3.Text = String.Format("De beurt is aan {0}", );
             }
         }
         */
