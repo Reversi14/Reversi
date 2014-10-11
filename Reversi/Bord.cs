@@ -28,6 +28,7 @@ namespace Reversi
         
         public void NieuwSpel()
         {
+            // Declaratie hier zorgt ervoor dat blauw altijd begint.
             beurt = true;
 
             // Declaraties van bord waarden.
@@ -65,18 +66,13 @@ namespace Reversi
         }
         #endregion
 
-        public bool endGame()
+        public bool eindSpel()
         {
-            for (int p = 0; p < w; p++)
-                for (int q = 0; q < h; q++)
-                {
-                    if (geldigeZet(p, q))
-                        return false;
-                }
-            return true;
+            return Score(Bord.BLAUW) + Score(Bord.ROOD) == w * h;
         }
 
-        public void Click(int x, int y)
+
+        public void Klik(int x, int y)
         {
             if (isLeeg(x, y) && geldigeZet(x,y))
             {
@@ -97,14 +93,14 @@ namespace Reversi
         
         public void omslagKleur(int x, int y)
         {
-            int b;
+            int spelerBeurt;
             int dx;
             int dy;
 
             if (beurt)
-                b = BLAUW;
+                spelerBeurt = BLAUW;
             else
-                b = ROOD;
+                spelerBeurt = ROOD;
 
             for (dx = -1; dx <= 1; dx++)
             {
@@ -118,7 +114,7 @@ namespace Reversi
                         {
                             if (isLeeg(i, j))
                                 break;
-                            if (Stenen[i, j] == b)
+                            if (Stenen[i, j] == spelerBeurt)
                             {
                                 if ((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1  && dy == 1) || (j < y - 1 && dy == -1))
                                 {
@@ -128,7 +124,7 @@ namespace Reversi
                                 else
                                     break;
                             }
-                            if (Stenen[i, j] != b)
+                            if (Stenen[i, j] != spelerBeurt)
                             {
                                 i += dx;
                                 j += dy;
@@ -141,18 +137,18 @@ namespace Reversi
 
         private void wisselKleur(int x1, int y1, int x2, int y2, int dx, int dy)
         {
+            int spelerBeurt;
             int p = x1;
             int q = y1;
-            int b;
 
             if (beurt)
-                b = BLAUW;
+                spelerBeurt = BLAUW;
             else
-                b = ROOD;
+                spelerBeurt = ROOD;
 
             while ((p > x2 && dx == -1) || (p < x2 && dx == 1) || (q > y2 && dy == -1) || (q < y2 && dy == 1))
             {
-                Stenen[p, q] = b;
+                Stenen[p, q] = spelerBeurt;
 
                 p += dx;
                 q += dy;
@@ -161,14 +157,14 @@ namespace Reversi
 
         public bool geldigeZet(int x, int y)
         {
-            int b;
+            int spelerBeurt;
             int dx;
             int dy;
 
             if (beurt)
-                b = BLAUW;
+                spelerBeurt = BLAUW;
             else
-                b = ROOD;
+                spelerBeurt = ROOD;
 
             for ( dx = -1; dx <= 1; dx++)
             {
@@ -182,14 +178,14 @@ namespace Reversi
                         {
                             if (isLeeg(i, j))
                                 break;
-                            if (Stenen[i,j] == b)
+                            if (Stenen[i, j] == spelerBeurt)
                             {
                                 if (((i > x + 1 && dx == 1) || (i < x - 1 && dx == -1) || (j > y + 1 && dy == 1) || (j < y - 1 && dy == -1)) && isLeeg(x, y))
                                     return true;
                                 else
                                     break;
                             }
-                            if (Stenen[i, j] !=b)
+                            if (Stenen[i, j] != spelerBeurt)
                             {
                                 i += dx;
                                 j += dy;
@@ -203,26 +199,26 @@ namespace Reversi
 
         public int Score(int Speler)
         {
-            int result = 0;
+            int resultaat = 0;
             for (int i = 0; i < w; i++)
             {
                 for (int j = 0; j < h; j++)
                 {
                     if (Stenen[i, j] == Speler)
                     {
-                        result++;
+                        resultaat++;
                     }
                 }
             }
-            return result;
+            return resultaat;
         }
         public string Spelers()
         {
-            string res = "";
+            string resultaat = "";
             if (beurt)
-                return res += "Blauw";
+                return resultaat += "Blauw";
             else
-                return res += "Rood";
+                return resultaat += "Rood";
         }
     }
 }

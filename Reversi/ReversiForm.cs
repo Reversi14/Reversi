@@ -22,7 +22,7 @@ namespace Reversi
         {
             InitializeComponent();
             hulp = false;
-            bord = new Bord(4, 4);
+            bord = new Bord(6, 6);
             rect = new Rectangle[bord.w, bord.h];
             steen = new Rectangle[bord.w, bord.h];
 
@@ -47,7 +47,7 @@ namespace Reversi
             i = X / (panel1.Width / bord.w);
             j = Y / (panel1.Height / bord.h);
 
-            bord.Click(i, j);
+            bord.Klik(i, j);
            
             panel1.Invalidate();
             DoubleBuffered = true;
@@ -55,13 +55,13 @@ namespace Reversi
 
         public void panel1_Paint(object obj, PaintEventArgs pea)
         {
-            int breedteVakje = panel1.Width / bord.w;
-            int hoogteVakje = panel1.Height / bord.h;
+            int breedteVakje = (panel1.Width - 1) / bord.w;
+            int hoogteVakje = (panel1.Height - 1) / bord.h;
 
             label1.Text = string.Format("heeft {0} veld(en)", bord.Score(Bord.BLAUW));
             label2.Text = string.Format("heeft {0} veld(en)", bord.Score(Bord.ROOD));
 
-            if (bord.endGame())
+            if (bord.eindSpel())
             {
                 if (bord.Score(Bord.BLAUW) > bord.Score(Bord.ROOD))
                 {
@@ -126,11 +126,6 @@ namespace Reversi
         {
             bord.NieuwSpel();
             panel1.Invalidate();
-        } 
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
