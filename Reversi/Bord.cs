@@ -81,9 +81,15 @@ namespace Reversi
                     if (geldigeZet(p, q))
                         return false;
                 }
-            return true;
 
-            return Score(Bord.Player1) + Score(Bord.Player2) == w * h;
+            wisselBeurt();
+            for (int p = 0; p < w; p++)
+                for (int q = 0; q < h; q++)
+                {
+                    if (geldigeZet(p, q))
+                        return false;
+                }
+            return true;
         }
 
         // Deze methode geeft aan of je daar een steen mag neerleggen,

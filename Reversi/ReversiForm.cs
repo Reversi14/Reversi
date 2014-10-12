@@ -22,7 +22,7 @@ namespace Reversi
         {
             InitializeComponent();
             hulp = false;                           // Hulpknop staat door 'false'-waarde uit in het begin.
-            bord = new Bord(8, 8);                 // Hoogte en breedte instellen van bord.
+            bord = new Bord(3, 4);                 // Hoogte en breedte instellen van bord.
             rect = new Rectangle[bord.w, bord.h];   // aantal rechthoeken in breedte en hoogte, resp. 'w' en 'h'.
             steen = new Rectangle[bord.w, bord.h];  // aantal stenen                  "
 
