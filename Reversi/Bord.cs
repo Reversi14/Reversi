@@ -16,7 +16,6 @@ namespace Reversi
         public const int Leeg = -1;                     // Als int-array is '-1' lege rechthoek
         public const int Player1 = 0;                   // Als '0' is de rechthoek van blauw en wordt er een blauwe steen ingezet.
         public const int Player2 = 1;                   // Ditzelfde geldt voor rood bij de waarde '1'.
-        Color kleur;
 
         public Bord(int w, int h)
         {

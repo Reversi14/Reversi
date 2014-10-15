@@ -22,7 +22,7 @@ namespace Reversi
         {
             InitializeComponent();
             hulp = false;                           // Hulpknop staat door 'false'-waarde uit in het begin.
-            bord = new Bord(6, 6);                  // Hoogte en breedte instellen van bord.
+            bord = new Bord(4, 4);                  // Hoogte en breedte instellen van bord.
             rect = new Rectangle[bord.w, bord.h];   // aantal rechthoeken in breedte en hoogte, resp. 'w' en 'h'.
             steen = new Rectangle[bord.w, bord.h];  // aantal stenen                  "
 
@@ -76,26 +76,28 @@ namespace Reversi
                 if (bord.Score(Bord.Player1) > bord.Score(Bord.Player2))
                 {
                     label3.Text = String.Format("{0} heeft gewonnen!", bord.hoogsteScore());
+                    label3.ForeColor = Color.DarkBlue;
                 }
                 else if (bord.Score(Bord.Player2) > bord.Score(Bord.Player1))
                 {
                     label3.Text = String.Format("{0} heeft gewonnen!", bord.hoogsteScore());
+                    label3.ForeColor = Color.Red;
                 }
                 else
                 {
                     label3.Text = String.Format("Revanche!?");
+                    label3.ForeColor = Color.Black;
                 }
             }
             else
             {
                 label3.Text = String.Format("{0} aan zet...", bord.Spelers());
+
                 if (bord.beurt)
                     label3.ForeColor = Color.DarkBlue;
-                else
-                    label3.ForeColor = Color.Red;
-
+                else 
+                    label3.ForeColor = Color.Red;                
             }
-
 
             Graphics g = pea.Graphics;
             Pen blackPen = new Pen(Brushes.Black, 1);
