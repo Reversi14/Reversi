@@ -62,7 +62,7 @@ namespace Reversi
         {
             // Declaratie grootte vakjes, de '-1' zorgt ervoor dat er beneden en links 
             // niet buiten het panel wordt getekend.
-            int breedteVakje = (panel1.Width - 1)/ bord.w;
+            int breedteVakje = (panel1.Width - 1) / bord.w;
             int hoogteVakje = (panel1.Height - 1) / bord.h;
 
             // Updaten van scores van beide spelers.
@@ -89,6 +89,11 @@ namespace Reversi
             else
             {
                 label3.Text = String.Format("{0} aan zet...", bord.Spelers());
+                if (bord.beurt)
+                    label3.ForeColor = Color.DarkBlue;
+                else
+                    label3.ForeColor = Color.Red;
+
             }
 
 
