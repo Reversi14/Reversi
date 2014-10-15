@@ -128,7 +128,10 @@ namespace Reversi
                     // Hulp rechthoeken tekenen als 'help' is aangevinkt.
                     if (bord.geldigeZet(i, j) && hulp)
                     {
-                        g.DrawRectangle(Pens.Black, i * breedteVakje + b, j * hoogteVakje + b, breedteVakje - c, hoogteVakje - c);
+                        if (bord.beurt)
+                            g.DrawRectangle(Pens.DarkBlue, i * breedteVakje + b, j * hoogteVakje + b, breedteVakje - c, hoogteVakje - c);
+                        else
+                            g.DrawRectangle(Pens.Red, i * breedteVakje + b, j * hoogteVakje + b, breedteVakje - c, hoogteVakje - c);
                     }
                 }
             }
@@ -147,5 +150,6 @@ namespace Reversi
             hulp = !hulp;
             panel1.Invalidate();
         }
+
     }
 }

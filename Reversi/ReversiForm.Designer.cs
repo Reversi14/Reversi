@@ -120,7 +120,7 @@
       private System.Windows.Forms.Button button1;
       private System.Windows.Forms.Label label1;
       private System.Windows.Forms.Label label2;
-      private System.Windows.Forms.Label label3;
+      public System.Windows.Forms.Label label3;
       private System.Windows.Forms.CheckBox checkBox1;
    }
 }
