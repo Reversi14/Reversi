@@ -76,11 +76,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(239, 34);
+            this.label3.Location = new System.Drawing.Point(205, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 29);
+            this.label3.Size = new System.Drawing.Size(127, 29);
             this.label3.TabIndex = 5;
-            this.label3.Text = "status";
+            this.label3.Text = "status spel";
             // 
             // checkBox1
             // 

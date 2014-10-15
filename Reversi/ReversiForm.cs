@@ -22,7 +22,7 @@ namespace Reversi
         {
             InitializeComponent();
             hulp = false;                           // Hulpknop staat door 'false'-waarde uit in het begin.
-            bord = new Bord(3, 4);                 // Hoogte en breedte instellen van bord.
+            bord = new Bord(6, 6);                  // Hoogte en breedte instellen van bord.
             rect = new Rectangle[bord.w, bord.h];   // aantal rechthoeken in breedte en hoogte, resp. 'w' en 'h'.
             steen = new Rectangle[bord.w, bord.h];  // aantal stenen                  "
 
@@ -35,8 +35,8 @@ namespace Reversi
         void ReversiForm_Paint(object sender, PaintEventArgs pea)
         {
             // Tekent een rode en blauwe steen op het Form.
-            pea.Graphics.DrawImage(Reversi.Properties.Resources.img_blue, 105, 68, 15, 15);
-            pea.Graphics.DrawImage(Reversi.Properties.Resources.img_red, 105, 95, 15, 15);
+            pea.Graphics.FillEllipse(Brushes.DarkBlue, 105, 70, 15, 15);
+            pea.Graphics.FillEllipse(Brushes.Red, 105, 95, 15, 15);
         }
 
         public void panel1_MouseClick(object sender, MouseEventArgs e)
@@ -62,7 +62,7 @@ namespace Reversi
         {
             // Declaratie grootte vakjes, de '-1' zorgt ervoor dat er beneden en links 
             // niet buiten het panel wordt getekend.
-            int breedteVakje = (panel1.Width - 1) / bord.w;
+            int breedteVakje = (panel1.Width - 1)/ bord.w;
             int hoogteVakje = (panel1.Height - 1) / bord.h;
 
             // Updaten van scores van beide spelers.
@@ -120,10 +120,10 @@ namespace Reversi
                 for (int j = 0; j < bord.h; j++)
                 {
                     if (bord.isPlayer1(i, j)) // blauwe stenen
-                        g.DrawImage(Reversi.Properties.Resources.img_blue, steen[i, j]);
+                        g.FillEllipse(Brushes.DarkBlue, steen[i, j]);
 
                     else if (bord.isPlayer2(i, j)) // rode stenen
-                        g.DrawImage(Reversi.Properties.Resources.img_red, steen[i, j]);
+                        g.FillEllipse(Brushes.Red, steen[i, j]);
 
                     // Hulp rechthoeken tekenen als 'help' is aangevinkt.
                     if (bord.geldigeZet(i, j) && hulp)

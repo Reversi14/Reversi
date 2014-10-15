@@ -75,20 +75,26 @@ namespace Reversi
         // er geen mogelijke zet is voor de huidige speler.
         public bool eindSpel()
         {
-            for (int p = 0; p < w; p++)
-                for (int q = 0; q < h; q++)
+            for (int i = 0; i < w; i++)
+            {
+                for (int j = 0; j < h; j++)
                 {
-                    if (geldigeZet(p, q))
+                    if (geldigeZet(i, j))
                         return false;
                 }
+            }                
 
             wisselBeurt();
-            for (int p = 0; p < w; p++)
-                for (int q = 0; q < h; q++)
+
+            for (int i = 0; i < w; i++)
+            {
+                for (int j = 0; j < h; j++)
                 {
-                    if (geldigeZet(p, q))
+                    if (geldigeZet(i, j))
                         return false;
                 }
+            }
+                
             return true;
         }
 
